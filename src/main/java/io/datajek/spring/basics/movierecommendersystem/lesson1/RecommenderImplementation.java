@@ -1,5 +1,10 @@
 package io.datajek.spring.basics.movierecommendersystem.lesson1;
 
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
@@ -11,15 +16,29 @@ public class RecommenderImplementation {
 
   private Filter filter; // name based autowired
 
+  private Logger logger = LoggerFactory.getLogger(this.getClass());
+
   @Autowired
   public RecommenderImplementation(@Qualifier("CF") Filter filter) {
     this.filter = filter;
+  }
+
+  @PostConstruct
+  public void postConstruct() {
+    logger.info("----- In RecommenderImplementation postConstruct method");
+  }
+
+  @PreDestroy
+  public void preDestroy() {
+    // cleanup code
+    logger.info("----- In RecommenderImplementation preDestroy method");
   }
 
   // set > constructor
   @Autowired
   @Qualifier("CF")
   public void setFilter(Filter filter) {
+    logger.info("+++++In RecommenderImplementation setter method..dependency injection");
     this.filter = filter;
   }
 
