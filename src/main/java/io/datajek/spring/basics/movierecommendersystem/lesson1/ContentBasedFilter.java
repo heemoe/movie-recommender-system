@@ -6,12 +6,11 @@ import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
-@Component("CBF")
 public class ContentBasedFilter implements Filter {
 
   private static int instances;
 
-  @Autowired
+  // @Autowired
   public Movie movie;
 
   public ContentBasedFilter() {

@@ -1,26 +1,30 @@
 package io.datajek.spring.basics.movierecommendersystem;
 
-import java.lang.reflect.Array;
 import java.util.Arrays;
-
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import io.datajek.spring.basics.movierecommendersystem.lesson1.CollaborativeFilter;
 import io.datajek.spring.basics.movierecommendersystem.lesson1.ContentBasedFilter;
 import io.datajek.spring.basics.movierecommendersystem.lesson1.Movie;
 import io.datajek.spring.basics.movierecommendersystem.lesson1.RecommenderImplementation;
 
-@SpringBootApplication // @Configuration @EnableAutoConfiguration @ComponentScan
+@Configuration // @Configuration @EnableAutoConfiguration @ComponentScan
+@ComponentScan
 public class MovieRecommenderSystemApplication {
 
 	public static void main(String[] args) {
 		// SpringApplication.run(MovieRecommenderSystemApplication.class, args);
 
-		ApplicationContext applicationContext = SpringApplication.run(MovieRecommenderSystemApplication.class, args);
+		ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext("appContext.xml");
 
-		RecommenderImplementation recommender = applicationContext.getBean(RecommenderImplementation.class);
+		System.out.println("\nBeans loaded:");
+		System.out.println(Arrays.toString(applicationContext.getBeanDefinitionNames()));
+
+		RecommenderImplementation recommender = applicationContext.getBean("recommenderImplementation",
+				RecommenderImplementation.class);
 		CollaborativeFilter cf1 = applicationContext.getBean(CollaborativeFilter.class);
 		CollaborativeFilter cf2 = applicationContext.getBean(CollaborativeFilter.class);
 
@@ -43,6 +47,7 @@ public class MovieRecommenderSystemApplication {
 		String[] result = recommender.recommendMovies("Finding Dory");
 		System.out.println(RecommenderImplementation.class);
 		System.out.println(Arrays.toString(result));
+		applicationContext.close();
 	}
 
 }

@@ -1,0 +1,13 @@
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.springframework.org/schema/beans                    
+       http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+  <!-- bean definitions -->
+  <bean id="contentBasedFilter" class="io.datajek.spring.basics.movierecommendersystem.lesson1.ContentBasedFilter"></bean>
+
+  <bean id="collaborativeFilter" class="io.datajek.spring.basics.movierecommendersystem.lesson1.CollaborativeFilter"></bean>
+
+  <bean id="recommenderImplementation" class="io.datajek.spring.basics.movierecommendersystem.lesson1.RecommenderImplementation">
+    <!-- <property name="filter" ref="collaborativeFilter"></property> -->
+    <constructor-arg ref="collaborativeFilter" />
+  </bean>
+</beans>
