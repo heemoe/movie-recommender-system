@@ -1,13 +1,11 @@
 package io.datajek.spring.basics.movierecommendersystem.lesson1;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Lookup;
-import org.springframework.beans.factory.config.ConfigurableBeanFactory;
-import org.springframework.context.annotation.Scope;
-import org.springframework.stereotype.Component;
+import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
 @Service
+@Primary
 public class ContentBasedFilter implements Filter {
 
   private static int instances;

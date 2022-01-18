@@ -2,9 +2,7 @@ package io.datajek.spring.basics.movierecommendersystem.lesson1;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
@@ -16,7 +14,6 @@ public class RecommenderImplementation {
   // Filter is a dependency of RecommenderImplementation.
 
   @Autowired
-  @Qualifier("contentBasedFilter")
   private Filter filter; // name based autowired
 
   public Filter getFilter() {

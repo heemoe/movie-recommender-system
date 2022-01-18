@@ -1,36 +1,24 @@
 package io.datajek.spring.basics.movierecommendersystem;
 
-import java.util.Arrays;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.PropertySource;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
-
-import io.datajek.spring.basics.movierecommendersystem.lesson1.CollaborativeFilter;
-import io.datajek.spring.basics.movierecommendersystem.lesson1.ContentBasedFilter;
-import io.datajek.spring.basics.movierecommendersystem.lesson1.Movie;
 import io.datajek.spring.basics.movierecommendersystem.lesson1.RecommenderImplementation;
 
-@Configuration // @Configuration @EnableAutoConfiguration @ComponentScan
+@SpringBootApplication // @Configuration @EnableAutoConfiguration @ComponentScan
 @PropertySource("classpath:app.properties")
 public class MovieRecommenderSystemApplication {
 
 	public static void main(String[] args) {
 		// SpringApplication.run(MovieRecommenderSystemApplication.class, args);
 
-		ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext("appContext.xml");
+		ApplicationContext appContext = SpringApplication.run(MovieRecommenderSystemApplication.class, args);
 
-		System.out.println("\nBeans loaded:");
-		System.out.println(Arrays.toString(applicationContext.getBeanDefinitionNames()));
+		RecommenderImplementation recommender = appContext.getBean(RecommenderImplementation.class);
 
-		RecommenderImplementation recommender = applicationContext.getBean("recommenderImpl",
-				RecommenderImplementation.class);
-
-		String[] result = recommender.recommendMovies("Finding Dory");
-		System.out.println(RecommenderImplementation.class);
-		System.out.println(Arrays.toString(result));
-		applicationContext.close();
+		String favoriteMovie = recommender.getFavoriteMovie();
+		System.out.println(favoriteMovie);
 	}
 
 }
