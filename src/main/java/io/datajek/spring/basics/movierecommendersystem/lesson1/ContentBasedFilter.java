@@ -5,7 +5,9 @@ import org.springframework.beans.factory.annotation.Lookup;
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
+@Service
 public class ContentBasedFilter implements Filter {
 
   private static int instances;

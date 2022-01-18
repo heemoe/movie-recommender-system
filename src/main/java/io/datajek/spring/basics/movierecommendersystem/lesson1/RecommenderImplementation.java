@@ -5,17 +5,26 @@ import javax.annotation.PreDestroy;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.stereotype.Component;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
 
-@Component
+@Service
 public class RecommenderImplementation {
+  @Value("${recommender.implementation.favoriteMovie: default value}")
+  String favoriteMovie;
 
   // Filter is a dependency of RecommenderImplementation.
 
+  @Autowired
+  @Qualifier("contentBasedFilter")
   private Filter filter; // name based autowired
 
   public Filter getFilter() {
     return filter;
+  }
+
+  public String getFavoriteMovie() {
+    return favoriteMovie;
   }
 
   // set > constructor
@@ -24,11 +33,6 @@ public class RecommenderImplementation {
   public void setFilter(Filter filter) {
     // logger.info("+++++In RecommenderImplementation setter method..dependency
     // injection");
-    this.filter = filter;
-  }
-
-  // @Autowired
-  public RecommenderImplementation(@Qualifier("CF") Filter filter) {
     this.filter = filter;
   }
 
@@ -46,7 +50,7 @@ public class RecommenderImplementation {
   // filter is automated inject (create a instance dynamic)
   public String[] recommendMovies(String movie) {
     System.out.println("Name of the filter in use: " + filter + "\n");
-    String[] results = this.filter.getRecommendations("Finding Dory");
+    String[] results = this.filter.getRecommendations(getFavoriteMovie());
     return results;
   }
 }
