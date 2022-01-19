@@ -11,8 +11,8 @@ public class RecommendationsController {
 
   @GetMapping("/movies")
   public List<Movie> getAllMovies() {
-    return Arrays.asList(new Movie(1, "Ice Age", 7.5),
+    return Arrays.asList(new Movie(1, "Ice Age", 2.5),
         new Movie(2, "Happy Feet", 6.4),
-        new Movie(3, "Shark Tales", 6.0));
+        new Movie(3, "Shark Tales", 2.0));
   }
 }
