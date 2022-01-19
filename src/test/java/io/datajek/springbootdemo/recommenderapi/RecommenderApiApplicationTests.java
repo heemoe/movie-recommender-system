@@ -1,10 +1,10 @@
-package io.datajek.spring.basics.movierecommendersystem;
+package io.datajek.springbootdemo.recommenderapi;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class MovieRecommenderSystemApplicationTests {
+class RecommenderApiApplicationTests {
 
 	@Test
 	void contextLoads() {
